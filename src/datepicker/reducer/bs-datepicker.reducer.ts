@@ -49,12 +49,11 @@ export function bsDatepickerReducer(state = initialDatepickerState,
 
       const date = setFullDate(state.view.date, payload.unit);
       let newState;
-      let mode:BsDatepickerViewMode;
+      let mode: BsDatepickerViewMode;
       if (canSwitchMode(payload.viewMode, state.minMode)) {
         mode = payload.viewMode;
         newState = { view: { date, mode } };
-      }
-      else {
+      } else {
         mode = state.view.mode
         newState = { selectedDate: date, view: { date, mode } };
       }

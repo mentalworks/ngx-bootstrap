@@ -24,7 +24,6 @@ import {
         (onNavigate)="navigateTo($event)"
         (onViewMode)="changeViewMode($event)"
       ></bs-datepicker-navigation-view>
-
       <!--days matrix-->
       <table role="grid" class="days weeks">
         <thead>
@@ -37,7 +36,8 @@ import {
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let week of calendar.weeks; let i = index">
+        <tr *ngFor="let week of calendar.weeks; let i = index"
+            bsDatepickerWeekDecorator [options]="options" [week]="week">
           <td class="week" *ngIf="options.showWeekNumbers">
             <span>{{ calendar.weekNumbers[i] }}</span>
           </td>

@@ -95,6 +95,11 @@ export class BsDatepickerDirective implements OnInit, OnDestroy, OnChanges {
   @Input() minMode: BsDatepickerViewMode;
 
   /**
+   * Indicates whether date should be selected by week or not
+   */
+  @Input() weekPicker: boolean;
+
+  /**
    * Emits when datepicker value has been changed
    */
   @Output() bsValueChange: EventEmitter<Date> = new EventEmitter();
@@ -215,7 +220,8 @@ export class BsDatepickerDirective implements OnInit, OnDestroy, OnChanges {
       isDisabled: this.isDisabled,
       minDate: this.minDate || this.bsConfig && this.bsConfig.minDate,
       maxDate: this.maxDate || this.bsConfig && this.bsConfig.maxDate,
-      minMode: this.minMode || this.bsConfig && this.bsConfig.minMode
+      minMode: this.minMode || this.bsConfig && this.bsConfig.minMode,
+      weekPicker: this.weekPicker || this.bsConfig && this.bsConfig.weekPicker
     });
   }
 

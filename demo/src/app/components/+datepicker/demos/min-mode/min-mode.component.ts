@@ -6,13 +6,13 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
   templateUrl: './min-mode.component.html'
 })
 export class DemoDatepickerMinModeComponent {
-  bsValue:Date = new Date(2017, 7);
+  bsValue: Date = new Date(2017, 7);
 
-  bsConfig:any;//Partial<BsDatepickerConfig>;
+  bsConfig: any; // Partial<BsDatepickerConfig>;
 
-  constructor () {
+  constructor() {
     this.bsConfig = Object.assign({}, {
-      minMode : 'month'
+      minMode: 'month'
     });
   }
 }

@@ -26,6 +26,7 @@ import { BsDaysCalendarViewComponent } from './themes/bs/bs-days-calendar-view.c
 import { BsMonthCalendarViewComponent } from './themes/bs/bs-months-calendar-view.component';
 import { BsTimepickerViewComponent } from './themes/bs/bs-timepicker-view.component';
 import { BsYearsCalendarViewComponent } from './themes/bs/bs-years-calendar-view.component';
+import { BsDatepickerWeekDecoratorDirective } from './themes/bs/bs-datepicker-week-decorator.directive';
 
 const _exports = [
   BsDatepickerContainerComponent,
@@ -42,6 +43,7 @@ const _exports = [
   imports: [CommonModule],
   declarations: [
     BsDatepickerDayDecoratorComponent,
+    BsDatepickerWeekDecoratorDirective,
     BsCurrentDateViewComponent,
     BsDatepickerNavigationViewComponent,
     BsTimepickerViewComponent,

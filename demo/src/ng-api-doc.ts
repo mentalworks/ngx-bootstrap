@@ -816,6 +816,12 @@ export const ngdoc: any = {
         "defaultValue": "true",
         "type": "boolean",
         "description": "<p>Allows to hide week numbers in datepicker</p>\n"
+      },
+      {
+        "name": "weekPicker",
+        "defaultValue": "false",
+        "type": "boolean",
+        "description": "<p>yes</p>\n"
       }
     ]
   },

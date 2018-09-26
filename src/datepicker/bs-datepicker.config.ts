@@ -29,6 +29,11 @@ export class BsDatepickerConfig
    */
   minMode?: BsDatepickerViewMode;
 
+  /**
+   * Defaut mode for all date pickers
+   */
+  weekPicker = false;
+
   /** CSS class which will be applied to datepicker container,
    * usually used to set color theme
    */

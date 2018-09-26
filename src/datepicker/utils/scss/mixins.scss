@@ -18,6 +18,12 @@
             color: $color;
           }
         }
+        tr.selected > td:not(.week) {
+          background-color: $color;
+          span {
+            color: $font-color-01;
+          }
+        }
       }
     }
   }

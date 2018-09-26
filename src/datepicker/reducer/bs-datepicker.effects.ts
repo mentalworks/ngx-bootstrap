@@ -31,7 +31,8 @@ export class BsDatepickerEffects {
   private _subs: Subscription[] = [];
 
   constructor(private _actions: BsDatepickerActions,
-              private _localeService: BsLocaleService) {}
+              private _localeService: BsLocaleService) {
+  }
 
   init(_bsDatepickerStore: BsDatepickerStore): BsDatepickerEffects {
     this._store = _bsDatepickerStore;
@@ -69,7 +70,7 @@ export class BsDatepickerEffects {
 
   /* Set rendering options */
   setOptions(_config: BsDatepickerConfig): BsDatepickerEffects {
-    const _options = Object.assign({locale: this._localeService.currentLocale}, _config);
+    const _options = Object.assign({ locale: this._localeService.currentLocale }, _config);
     this._store.dispatch(this._actions.setOptions(_options));
 
     return this;
@@ -100,9 +101,14 @@ export class BsDatepickerEffects {
     container.viewMode = this._store.select(state => state.view.mode);
 
     container.options = this._store
-      .select(state => state.showWeekNumbers)
+      .select(state => state)
       .pipe(
-        map(showWeekNumbers => ({showWeekNumbers}))
+        map(state => {
+          return {
+            weekPicker: state.weekPicker,
+            showWeekNumbers: state.showWeekNumbers
+          };
+        })
       );
 
     return this;
@@ -150,7 +156,7 @@ export class BsDatepickerEffects {
       }
       this._store.dispatch(
         this._actions.navigateTo({
-          unit: {month: getMonth(event.date)},
+          unit: { month: getMonth(event.date) },
           viewMode: 'day'
         })
       );
@@ -162,7 +168,7 @@ export class BsDatepickerEffects {
       }
       this._store.dispatch(
         this._actions.navigateTo({
-          unit: {year: getFullYear(event.date)},
+          unit: { year: getFullYear(event.date) },
           viewMode: 'month'
         })
       );
