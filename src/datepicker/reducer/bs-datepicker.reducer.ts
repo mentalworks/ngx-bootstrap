@@ -1,22 +1,29 @@
 // tslint:disable:max-file-line-count
 import { BsDatepickerState, initialDatepickerState } from './bs-datepicker.state';
-import { Action } from '../../mini-ngrx/index';
+import { Action } from 'ngx-bootstrap/mini-ngrx';
 import { BsDatepickerActions } from './bs-datepicker.actions';
 import { calcDaysCalendar } from '../engine/calc-days-calendar';
 import { formatDaysCalendar } from '../engine/format-days-calendar';
 import { flagDaysCalendar } from '../engine/flag-days-calendar';
-import { setFullDate, shiftDate } from '../../chronos/utils/date-setters';
+import {
+  setFullDate,
+  shiftDate,
+  isArray,
+  isDateValid,
+  startOf,
+  getLocale,
+  isAfter,
+  isBefore
+} from 'ngx-bootstrap/chronos';
 import { canSwitchMode } from '../engine/view-mode';
 import { formatMonthsCalendar } from '../engine/format-months-calendar';
 import { flagMonthsCalendar } from '../engine/flag-months-calendar';
 import { formatYearsCalendar, yearsPerCalendar } from '../engine/format-years-calendar';
 import { flagYearsCalendar } from '../engine/flag-years-calendar';
-import { BsViewNavigationEvent, DatepickerFormatOptions, BsDatepickerViewMode } from '../models/index';
-import { isArray, isDateValid } from '../../chronos/utils/type-checks';
-import { startOf } from '../../chronos/utils/start-end-of';
-import { getLocale } from '../../chronos/locale/locales';
-import { isAfter, isBefore } from '../../chronos/utils/date-compare';
+import { BsViewNavigationEvent, DatepickerFormatOptions, BsDatepickerViewMode } from '../models';
 
+
+/* tslint:disable-next-line: cyclomatic-complexity */
 export function bsDatepickerReducer(state = initialDatepickerState,
                                     action: Action): BsDatepickerState {
   switch (action.type) {
@@ -54,7 +61,7 @@ export function bsDatepickerReducer(state = initialDatepickerState,
         mode = payload.viewMode;
         newState = { view: { date, mode } };
       } else {
-        mode = state.view.mode
+        mode = state.view.mode;
         newState = { selectedDate: date, view: { date, mode } };
       }
 
@@ -146,6 +153,11 @@ export function bsDatepickerReducer(state = initialDatepickerState,
     case BsDatepickerActions.SET_IS_DISABLED: {
       return Object.assign({}, state, {
         isDisabled: action.payload
+      });
+    }
+    case BsDatepickerActions.SET_DATE_CUSTOM_CLASSES: {
+      return Object.assign({}, state, {
+        dateCustomClasses: action.payload
       });
     }
 
@@ -279,10 +291,13 @@ function flagReducer(state: BsDatepickerState,
           isDisabled: state.isDisabled,
           minDate: state.minDate,
           maxDate: state.maxDate,
+          daysDisabled: state.daysDisabled,
+          datesDisabled: state.datesDisabled,
           hoveredDate: state.hoveredDate,
           selectedDate: state.selectedDate,
           selectedRange: state.selectedRange,
           displayMonths: state.displayMonths,
+          dateCustomClasses: state.dateCustomClasses,
           monthIndex
         })
     );
